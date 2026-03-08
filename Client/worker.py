@@ -1291,7 +1291,22 @@ def run_and_parse_runner(config, command, runner_idx, results_queue, abort_flag)
             break
 
         if 'Started game' not in line and 'Score of' not in line:
-            print('[#%d] %s' % (runner_idx, line))
+            ww = 'White' in line
+            bw = 'Black' in line
+
+            dv = line.find('dev') < line.find('base')
+            bv = line.find('base') < line.find('dev')
+
+            if not (ww or bw) and not ('Draw' in line) and not ('Indexing' in line):
+                print('\033[43;30m', end='')
+
+            elif ww and dv or bw and bv:
+                print('\033[42;30m', end='')
+
+            elif bw and dv or ww and bv:
+                print('\033[41;30m', end='')
+
+            print('[#%d] %s\033[0m' % (runner_idx, line))
 
         if 'Finished game' in line:
             MatchRunner.update_results(results, line)
