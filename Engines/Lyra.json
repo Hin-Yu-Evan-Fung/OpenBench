@@ -52,6 +52,11 @@
             "book_name" : "Pohl.epd",
             "win_adj"   : "movecount=3 score=400",
             "draw_adj"  : "movenumber=40 movecount=8 score=10"
+        },
+
+        "STC" : {
+            "both_options"      : "Threads=1 Hash=8",
+            "both_time_control" : "8.0+0.08"
         }
     },
 
